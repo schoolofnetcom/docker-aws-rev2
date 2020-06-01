@@ -1,0 +1,31 @@
+{
+	"containerDefinitions": [{
+		"mountPoints": [{
+			"sourceVolume": "data",
+			"containerPath": "/var/lib/mysql",
+			"readOnly": false
+		}],
+		"portMappings": [{
+			"hostPort": 3306,
+			"protocol": "tcp",
+			"containerPort": 3306
+		}],
+		"environment": [{
+			"name": "MYSQL_ROOT_PASSWORD",
+			"value": "schoolofnet"
+		}],
+		"cpu": 512,
+		"memory": 512,
+		"image": "mysql:5.7",
+		"name": "mysql"
+	}],
+	"volumes": [{
+		"name": "data",
+		"dockerVolumeConfiguration": {
+			"scope": "shared",
+			"autoprovision": true,
+			"driver": "local"
+		}
+	}],
+	"family": "mysql"
+}

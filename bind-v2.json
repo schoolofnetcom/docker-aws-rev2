@@ -1,0 +1,51 @@
+{
+	"containerDefinitions": [
+        {
+          "name": "webserver1",
+          "image": "nginx",
+          "cpu": 100,
+          "memory": 100,
+          "portMappings": [
+            {
+              "containerPort": 80,
+              "hostPort": 80
+            }
+          ],
+          "essential": true,
+          "mountPoints": [
+            {
+              "sourceVolume": "webroot",
+              "containerPath": "/usr/share/nginx/html",
+              "readOnly": true
+            }
+          ]
+        },
+        {
+          "name": "web-server-2",
+          "image": "jacksonlima91/webserver-nginx-2",
+          "cpu": 100,
+          "memory": 100,
+          "portMappings": [
+            {
+              "containerPort": 9080,
+              "hostPort": 9080
+            }
+          ],
+          "essential": true,
+          "mountPoints": [
+            {
+              "sourceVolume": "webroot",
+              "containerPath": "/usr/share/nginx/html",
+              "readOnly": true
+            }
+          ]
+        }
+      ],
+	"volumes": [{
+		"name": "webroot",
+            "host" : {
+               "sourcePath" : "/opt/nginx"
+            }
+	}],
+	"family": "webdata"
+}
